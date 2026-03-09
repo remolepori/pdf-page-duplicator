@@ -1,7 +1,10 @@
-<h2>PDF Page Duplicator (Client-side) (Wordpress Plugin)</h2>
+# PDF Page Duplicator (Client-side) (Wordpress Plugin)
 
-<h4>Beschreibung:</h4>
-Dupliziert PDF-Seiten im Browser (ohne Server-Upload). Modernes, mobiles UI, Drag&Drop, Fortschritt, Seitenbereich und Format.
+## Beschreibung
+Dupliziert PDF-Seiten im Browser (ohne Server-Upload). Modernes, mobiles UI, Drag&Drop, Vorschau, Fortschritt, Seitenbereich und Format.
 
-<h4>Shortcode:</h4>
+## Shortcode
 <code>[pdf_page_duplicator]</code>
+
+## Screenshot
+<img src="https://remo.me/wp-content/uploads/2026/03/pdf-duplizieren-1536x1116.png" style="width:500px"><img>
