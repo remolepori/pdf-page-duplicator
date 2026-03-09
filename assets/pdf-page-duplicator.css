@@ -1,0 +1,1026 @@
+:root{
+  --ppd-bg:#ffffff;
+  --ppd-surface:rgba(255,255,255,.75);
+  --ppd-text:#0f172a;
+  --ppd-muted:rgba(15,23,42,.65);
+  --ppd-border:rgba(15,23,42,.12);
+  --ppd-border-strong:rgba(15,23,42,.18);
+  --ppd-shadow:0 10px 30px rgba(2,6,23,.08);
+  --ppd-radius:16px;
+  --ppd-radius-sm:8px;
+  --ppd-focus:0 0 0 4px rgba(15,23,42,.12);
+  --ppd-accent:#111827;
+}
+
+
+/*
+.ppd-wrap{
+  max-width:860px;
+  margin:0 auto;
+  background:var(--ppd-bg);
+  border:1px solid var(--ppd-border);
+  border-radius:8px;
+  box-shadow:var(--ppd-shadow);
+  overflow:hidden;
+}
+*/
+
+
+.ppd-header{
+  padding:18px 18px 18px 18px;
+  display: none;
+/* 
+  border-bottom:1px solid var(--ppd-border);
+  background:
+    radial-gradient(1200px 200px at 0% 0%, rgba(15,23,42,.06), transparent 60%),
+    radial-gradient(1200px 200px at 100% 0%, rgba(15,23,42,.05), transparent 60%);
+*/
+}
+.ppd-title{
+  font-size:22px;
+  font-weight:700;
+  letter-spacing:-0.01em;
+  color:var(--ppd-text);
+  margin:0;
+}
+.ppd-subtitle{
+  margin:0;
+  font-size:13px;
+  color:var(--ppd-muted);
+  text-align: center;
+}
+
+.ppd-body{ padding:18px 18px 18px 18px; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 2/3 links (ppd-grid), 1/3 rechts (Preview) */
+.ppd-layout{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  align-items: stretch; /* WICHTIG */
+}
+
+/* Desktop: Sidebar rechts */
+@media (min-width: 960px){
+
+  /* Layout bleibt 2/3 : 1/3 */
+  .ppd-layout{
+    grid-template-columns: 2fr 1fr;
+    align-items: start; /* wichtig: sonst streckt es "auto" und kann unerwartet wachsen */
+  }
+
+  /* Rechte Spalte bekommt eine echte Höhenbegrenzung */
+  .ppd-side{
+    position: sticky;
+    top: 20px;
+    min-height: 0;              /* wichtig für inneres Scrolling */
+    display: flex;
+  }
+
+  /* Card füllt die begrenzte Sidebar-Höhe */
+  .ppd-preview-card{
+    height: 100%;
+  }
+
+  /* NUR die Miniaturen scrollen */
+  .ppd-preview{
+    flex: 1 1 auto;
+    overflow-y: auto;
+    min-height: 0;              /* absolut entscheidend */
+    padding-right: 6px;
+  }
+}
+
+
+
+
+/* Preview-Card soll sauber in der Sidebar sitzen */
+.ppd-preview-card{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;           /* verhindert, dass Content die Card aufbläht */
+  min-height: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.ppd-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:15px;
+}
+
+
+
+
+
+
+@media (min-width:720px){
+  .ppd-grid{ grid-template-columns:1fr 1fr; gap:15px; }
+  .ppd-span-2{ grid-column:span 2; }
+}
+
+
+
+
+
+
+
+.ppd-card{
+  border:1px solid var(--ppd-border);
+  border-radius:8px;
+  background:var(--ppd-surface);
+  padding:20px;
+}
+
+
+.ppd-heading{
+  display:block;
+  font-weight:700;
+  font-size:22px;
+  color:var(--ppd-text);
+  margin-bottom:10px;
+  font-family: 'Montserrat';
+  line-height: 1;
+}
+
+
+.ppd-label{
+  display:block;
+  font-weight: 600;
+  font-size: 16px;
+  color:var(--ppd-text);
+  font-family: 'Montserrat';
+}
+
+.ppd-help{
+  font-size:12px;
+  color:var(--ppd-muted);
+  line-height:1.35;
+  font-family: 'Montserrat';
+}
+
+.ppd-drop{
+  border:1px dashed var(--ppd-border-strong);
+  border-radius:var(--ppd-radius-sm);
+  padding:16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  cursor:pointer;
+  transition:transform .12s ease, border-color .12s ease, background .12s ease;
+  background:rgba(15,23,42,.02);
+  flex-direction: column;
+  gap: 10px;
+}
+.ppd-drop:hover{ 
+transform:translateY(-1px); 
+border-color:rgba(15,23,42,.28);
+}
+
+.ppd-drop.is-over{ 
+background:#e1e8ed; 
+border-color:rgba(15,23,42,.32); 
+}
+
+.ppd-drop-left{ 
+	display:flex; 
+	align-items: flex-start;
+	gap:12px; 
+	min-width:0; 
+	width: 100%;
+	justify-content: center;
+	}
+
+
+.ppd-ico{
+  width:42px; height:42px;
+  border-radius:8px;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(15,23,42,.06);
+  border:1px solid rgba(15,23,42,.10);
+  flex:0 0 auto;
+}
+.ppd-ico svg{ 
+width:22px; 
+height:22px; 
+opacity:.9; 
+color: #333;
+}
+
+.ppd-drop-text{ 
+    min-width:0; 
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ppd-drop-strong{ 
+font-weight:700; 
+color:var(--ppd-text); 
+font-size:14px; 
+font-family: 'Montserrat';
+}
+
+.ppd-filemeta{
+  font-size:12px; color:var(--ppd-muted);
+  overflow:hidden; 
+  text-overflow:ellipsis; 
+/*  white-space:nowrap;   */
+  max-width:520px;
+  font-family: 'Montserrat';
+  font-weight: 600;
+}
+
+.ppd-pagecount{ 
+font-size:12px; 
+color:var(--ppd-muted); 
+font-family: 'Montserrat';
+font-weight: 600;
+}
+
+.ppd-chip{
+  font-size:12px; color:var(--ppd-muted);
+  border:1px solid var(--ppd-border);
+  padding:6px 10px;
+  border-radius:8px;
+  background:rgba(255,255,255,.75);
+  flex:0 0 auto;
+  font-family: 'Montserrat';
+}
+
+.ppd-radio{ 
+	display:grid; 
+	gap:15px; 
+	grid-template-columns: 1fr 1fr;
+}
+
+
+.ppd-radio label{
+  display:flex; align-items:flex-start; gap:10px;
+  padding:10px 12px;
+  border-radius:8px;
+  border:1px solid var(--ppd-border);
+  background:rgba(255,255,255,.6);
+  cursor:pointer;
+  transition:border-color .12s ease, transform .12s ease;
+}
+.ppd-radio label:hover{ 
+	transform:translateY(-1px); 
+	border-color:rgba(15,23,42,.22); 
+	background:rgba(15,23,42,.02); 
+	}
+
+.ppd-radio label:has(input:checked){
+	border-color:rgba(15,23,42,.22); 
+	background:rgba(15,23,42,.02); 
+}
+
+
+
+
+
+
+
+.ppd-radio input{ margin-top:2px; }
+
+.ppd-radio-title{ 
+	font-weight:700; 
+	font-size:13px; 
+	color:var(--ppd-text); 
+	line-height: 1rem;
+	}
+
+
+
+
+.ppd-radio-desc{ font-size:12px; color:var(--ppd-muted); margin-top:3px; }
+
+.ppd-row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+
+.ppd-input{
+  width:100%;
+  border:1px solid var(--ppd-border);
+  border-radius:8px!important;
+  padding:10px 12px;
+  font-size:14px;
+  outline:none;
+  background:rgba(255,255,255,.85);
+  color: #333 !important;;
+}
+.ppd-input:focus{ box-shadow:var(--ppd-focus); border-color:rgba(15,23,42,.30); }
+
+.ppd-input[type=number]{
+ max-width:100%;
+padding: 15px 10px;
+font-size: 14px;
+}
+
+.ppd-range {
+    display:flex;
+    align-items: flex-start;
+    gap:10px; flex-wrap:wrap;
+    width: 100%;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+
+.ppd-range .ppd-input {
+ max-width:100%; 
+}
+
+.ppd-actions {
+	display:flex;
+	gap:10px;
+	flex-wrap:wrap;
+	justify-content:flex-start;
+	/* margin-top:14px; */
+	}
+
+.ppd-btn{
+  appearance:none;
+  border:1px solid transparent;
+  border-radius:8px;
+  padding:10px 14px;
+  font-weight:700;
+  cursor:pointer;
+  transition:transform .12s ease, opacity .12s ease, box-shadow .12s ease;
+  line-height: 1;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+.ppd-btn:active{ transform:translateY(1px); }
+.ppd-btn-primary{
+  background:var(--ppd-accent);
+  color:#fff;
+  box-shadow:0 8px 18px rgba(2,6,23,.18);
+}
+
+.ppd-btn-primary:hover{ 
+	box-shadow:0 12px 26px rgba(2,6,23,.20); 
+	transform: translateY(-1px);
+}
+
+
+.ppd-btn-secondary{
+  background:rgba(255,255,255,.85);
+  color:var(--ppd-text);
+  border-color:var(--ppd-border);
+}
+.ppd-btn[disabled]{ opacity:.6; cursor:not-allowed; }
+
+.ppd-status{
+  margin-top:15px;
+  padding:10px 12px;
+  border-radius:8px;
+  border:1px solid var(--ppd-border);
+  background:#f8d7da;
+  font-size:13px;
+  color:var(--ppd-text);
+  white-space:pre-wrap;
+  font-family: 'Montserrat';
+}
+
+.ppd-progress { 
+	margin-top: 15px; 
+	}
+
+.ppd-progress-top{
+  	display:flex; 
+	justify-content:space-between;
+  	font-size:12px; 
+	color:var(--ppd-muted);
+	font-family: 'Montserrat';
+	}
+
+.ppd-bar{
+  	height:10px;
+ 	 border-radius:8px;
+  	background:rgba(15,23,42,.08);
+  	overflow:hidden;
+  	margin-top:8px;
+	}
+
+.ppd-bar > span{
+  	display:block;
+  	height:100%;
+  	width:0%;
+ 	background:rgba(15,23,42,.90);
+  	border-radius:8px;
+  	transition:width .08s linear;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Mobile optimizations */
+@media (max-width:480px){
+  .ppd-header{ padding:14px 14px 12px 14px; }
+  .ppd-body{ padding:14px; }
+  .ppd-title{ font-size:16px; }
+  .ppd-subtitle{ font-size:12px; }
+
+.ppd-card { 
+	padding:12px; 
+}
+
+*/
+.ppd-heading-outside {
+	padding-left:12px;
+}
+*/
+
+.ppd-drop { 
+	padding:12px; 
+	gap:10px; 
+	align-items:flex-start; 
+        flex-direction: column;
+	}
+
+.ppd-ico{ width:38px; height:38px; border-radius:8x; }
+
+
+
+.ppd-ico svg {
+width:20px; 
+height:20px; 
+color: #333;
+}
+
+
+
+
+  .ppd-chip{ padding:5px 9px; }
+
+  .ppd-filemeta{
+    white-space:normal;
+    overflow:visible;
+    text-overflow:clip;
+    max-width:none;
+    word-break:break-word;
+  }
+
+.ppd-input[type=number],
+.ppd-range .ppd-input{ max-width:none; width:100%; }
+
+.ppd-range{ align-items:stretch; }
+
+.ppd-actions { 
+	justify-content:stretch; 
+	}
+
+  .ppd-btn { 
+width:100%; 
+text-align: center;
+padding: 12px 14px;
+}
+
+
+.ppd-checkbox { 
+	justify-content: center;
+	width:100%; 
+	}
+
+.ppd-radio{
+	grid-template-columns: 1fr;
+	}
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.ppd-card-actions {
+	margin-top: 15px;
+/*	position: sticky;
+	bottom: 10px; */
+	}
+
+
+.ppd-disclaimer {
+	margin-top: 15px;
+	}
+
+
+/* Erfolgsmeldung */
+.ppd-status.is-success{
+	background: rgba(16, 185, 129, 0.12);   /* grünlich */
+	border-color: rgba(16, 185, 129, 0.35);
+	color: #065f46;
+}
+
+
+
+
+
+
+
+
+
+
+/* PDF Vorschau */
+.ppd-preview {
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap:15px;
+  margin-top:10px;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 6px;
+  flex: 0 1 auto;
+  align-items: start;
+}
+
+.ppd-preview-page {
+  border:1px solid var(--ppd-border);
+  border-radius:8px;
+  background:#fff;
+  padding:6px;
+  text-align:center;
+  font-size:12px;
+}
+
+.ppd-preview-page img{
+  width:100%;
+  height:auto;
+  display:block;
+  border-radius:4px;
+}
+
+.ppd-preview-page span{
+  display:block;
+  margin-top:6px;
+  font-weight:600;
+  font-family: 'Montserrat';
+}
+
+.ppd-preview::-webkit-scrollbar{
+  width: 8px;
+}
+.ppd-preview::-webkit-scrollbar-thumb{
+  background: rgba(15,23,42,.25);
+  border-radius: 8px;
+}
+.ppd-preview::-webkit-scrollbar-track{
+  background: transparent;
+}
+
+
+
+
+/* Vorschau-Platzhalter (kein PDF geladen) */
+.ppd-preview-empty{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 16px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--ppd-muted);
+  border: 1px dashed var(--ppd-border);
+  border-radius: 12px;
+  background: rgba(15,23,42,.02);
+  font-family: 'Montserrat';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Preview Label + Badge */
+.ppd-preview-label{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-top:6px;
+}
+
+.ppd-preview-newpage{
+  font-weight:600;
+  font-size:12px;
+  color: var(--ppd-text);
+}
+
+.ppd-preview-badge{
+  font-size:11px;
+  color: var(--ppd-muted);
+  border:1px solid var(--ppd-border);
+  background: rgba(255,255,255,.75);
+  padding:3px 8px;
+  border-radius:8px;
+  white-space:nowrap;
+  font-weight: 600;
+  font-family: 'Montserrat';
+}
+
+
+
+
+/* Hover-Zoom Tooltip (grosses Preview) */
+.ppd-hover-preview{
+  position: fixed;
+  z-index: 9999999;
+  display: none;
+  pointer-events: none;
+  width: min(520px, 70vw);
+  max-height: 75vh;
+  padding: 20px;
+  background: rgba(255,255,255,.98);
+  border: 1px solid var(--ppd-border);
+  border-radius: 8px;
+  box-shadow: var(--ppd-shadow);
+}
+
+.ppd-hover-preview img{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.ppd-hover-preview .ppd-hover-caption{
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--ppd-muted);
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-weight:600;
+}
+
+
+
+
+
+
+/* Hover-Caption: gleiches Layout wie ppd-preview-label */
+.ppd-hover-caption{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-top:6px;
+}
+
+.ppd-hover-caption .ppd-hover-left{
+  font-weight:600;
+  font-size:12px;
+  color: var(--ppd-text);
+}
+
+.ppd-hover-caption .ppd-hover-right{
+  font-size:11px;
+  color: var(--ppd-muted);
+  border:1px solid var(--ppd-border);
+  background: rgba(255,255,255,.75);
+  padding:3px 8px;
+  border-radius: 8px;
+  white-space:nowrap;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Badge-Zeile unter der Vorschau */
+.ppd-preview-count{
+  margin-top: 20px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border-top: 1px solid var(--ppd-border);
+  padding-top: 15px;
+}
+
+
+#ppd-preview-count-new {
+	font-size: 12px;
+	color: var(--ppd-text);
+	font-weight: 600;
+	font-family: 'Montserrat';
+	border: none;
+	padding: 3px 0px;
+	}
+
+
+
+.ppd-help{
+  white-space: pre-line;
+}
+
+
+
+/* Two-up Vorschau: zwei Miniaturen nebeneinander innerhalb einer Karte */
+.ppd-preview-two-up .ppd-two-up-row{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.ppd-preview-two-up .ppd-two-up-row img{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+.ppd-two-up-empty{
+  border: 0px dashed var(--ppd-border);
+  background: rgb(255 255 255 / 0%);
+}
+
+
+
+
+
+
+
+
+
+.ppd-card-innercontainer {
+    display: grid;
+    gap: 15px;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+
+
+.ppd-card-innercontainer-item {
+    display: flex;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--ppd-border);
+    background: rgba(255, 255, 255, .6);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+}
+
+
+
+.ppd-actions-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: stretch;
+    row-gap: 15px;
+}
+
+
+
+.ppd-checkbox {
+    display: flex;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--ppd-border);
+    background: rgba(255, 255, 255, .6);
+    flex-direction: row;
+    align-items: center;
+    color: #000000;
+    cursor: pointer;
+    gap: 3px;
+}
+
+
+
+.ppd-checkbox:hover { 
+	transform:translateY(-1px); 
+	border-color: rgba(15, 23, 42, .22);
+        background: rgba(15, 23, 42, .02);
+	}
+
+
+
+
+
+
+
+@media (max-width: 480px) {
+    .ppd-card-innercontainer {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+
+.ppd-btn-secondary:hover {
+	transform: translateY(-1px);
+    border-color: rgba(15, 23, 42, .22);
+    background: rgba(15, 23, 42, .02);
+	}
+
+
+
+.ppd-two-up-row.ppd-two-up-vertical{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
+  gap: 6px;
+}
+
+.ppd-two-up-row.ppd-two-up-vertical img,
+.ppd-two-up-row.ppd-two-up-vertical .ppd-two-up-empty{
+  width: 100%;
+}
+
+
+
+.ppd-two-up-empty{
+  display: grid;
+  place-items: center;
+  min-height: 80px; /* je nach Thumbhöhe */
+}
+
+
+
+
+
+
+/* Warnung: beide Export-Optionen deaktiviert */
+.ppd-checkbox.ppd-warn,
+.ppd-checkbox-row.ppd-warn {
+  outline: 1px solid rgba(220, 38, 38, 0.85);
+  background: rgba(220, 38, 38, 0.10);
+  border-radius: 8px;
+  transition: background .15s ease, outline-color .15s ease;
+}
+
+/* optional: kurzer "pulse" Effekt */
+@keyframes ppdPulseRed {
+  0% { box-shadow: 0 0 0 0 rgba(220,38,38,.35); }
+  100% { box-shadow: 0 0 0 14px rgba(220,38,38,0); }
+}
+
+.ppd-checkbox.ppd-warn.ppd-pulse,
+.ppd-checkbox-row.ppd-warn.ppd-pulse {
+  animation: ppdPulseRed .35s ease-out 1;
+}
+
+
+
+
+.ppd-open-container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.ppd-checkbox input[type="checkbox"]{
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #cbd5e1;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  position: relative;
+  transition: all .15s ease;
+  margin: 0px;
+}
+
+.ppd-checkbox input[type="checkbox"]:hover{
+  border-color: #64748b;
+}
+
+.ppd-checkbox input[type="checkbox"]:checked{
+  background: var(--ppd-accent);
+  border-color: var(--ppd-accent);
+}
+
+/* Häkchen */
+.ppd-checkbox input[type="checkbox"]:checked::after{
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+
+
+
+
+.ppd-radio-format {
+	display: flex;
+	flex-direction: column;
+	}
+
+
+
+label {
+	margin: 0;
+	text-transform: uppercase;
+    	font-size: 14px;
+    	font-weight: 600;
+	line-height: 1;
+	}
+
+
+
